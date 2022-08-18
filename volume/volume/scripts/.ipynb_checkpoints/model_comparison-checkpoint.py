@@ -13,6 +13,7 @@ from sklearn.metrics import mean_squared_error
 from sklearn.preprocessing import StandardScaler
 from etl import ETL
 import pandas as pd
+import wandb
 class ModelComparison:
     def __init__(self):
         self.etl = ETL('train.csv')
@@ -118,52 +119,60 @@ class ModelComparison:
         y_train = scaler_y.fit_transform(y_train)
         y_test = scaler_y.transform(y_test)
         return x_train, y_train, x_test, y_test
-    def linear_reg(self):
+    def linear_reg(self, X_train, y_train, X_test, y_test):
         model = LinearRegression()
         model.fit(self.x_train, self.y_train)
+        wandb.sklearn.plot_regressor(model, X_train, X_test, y_train, y_test,  model_name="Linear")
         self.r2.append(self.get_r2(model))
         self.mae.append(self.get_mae(model))
         self.mse.append(self.get_mse(model))
         return model
-    def elasticnet(self):
+    def elasticnet(self, X_train, y_train, X_test, y_test):
         model = ElasticNet()
         model.fit(self.x_train, self.y_train)
+        wandb.sklearn.plot_regressor(model, X_train, X_test, y_train, y_test,  model_name="ElasticNet")
         self.r2.append(self.get_r2(model))
         self.mae.append(self.get_mae(model))
         self.mse.append(self.get_mse(model))
-    def sgd_reg(self):
+    def sgd_reg(self, X_train, y_train, X_test, y_test):
         model = SGDRegressor()
         model.fit(self.x_train, self.y_train)
+        wandb.sklearn.plot_regressor(reg, X_train, X_test, y_train, y_test,  model_name="SGD")
         self.r2.append(self.get_r2(model))
         self.mae.append(self.get_mae(model))
         self.mse.append(self.get_mse(model))
-    def bayesian_ridge(self):
+    def bayesian_ridge(self, X_train, y_train, X_test, y_test):
         model = BayesianRidge()
         model.fit(self.x_train, self.y_train)
+        wandb.sklearn.plot_regressor(model, X_train, X_test, y_train, y_test,  model_name="BayesianRidge")
         self.r2.append(self.get_r2(model))
         self.mae.append(self.get_mae(model))
         self.mse.append(self.get_mse(model))
-    def gbr(self):
+    def gbr(self, X_train, y_train, X_test, y_test):
         model = GradientBoostingRegressor()
         model.fit(self.x_train, self.y_train)
+        wandb.sklearn.plot_regressor(model, X_train, X_test, y_train, y_test,  model_name="GradientBoosting")
         self.r2.append(self.get_r2(model))
         self.mae.append(self.get_mae(model))
         self.mse.append(self.get_mse(model))
-    def svr(self):
+    def svr(self, X_train, y_train, X_test, y_test):
         model = SVR()
         model.fit(self.x_train, self.y_train)
+        wandb.sklearn.plot_regressor(model, X_train, X_test, y_train, y_test,  model_name="SVR")
         self.r2.append(self.get_r2(model))
         self.mae.append(self.get_mae(model))
         self.mse.append(self.get_mse(model))
-    def kr(self):
+    def kr(self, X_train, y_train, X_test, y_test):
         model = KernelRidge()
         model.fit(self.x_train, self.y_train)
+        wandb.sklearn.plot_regressor(model, X_train, X_test, y_train, y_test,  model_name="KernelRidge")
         self.r2.append(self.get_r2(model))
         self.mae.append(self.get_mae(model))
         self.mse.append(self.get_mse(model))
-    def rfg(self):
+    def rfg(self, X_train, y_train, X_test, y_test):
         model = RandomForestRegressor()
         model.fit(self.x_train, self.y_train)
+        wandb.sklearn.plot_regressor(model, X_train, X_test, y_train, y_test,  model_name="RandomForest")
         self.r2.append(self.get_r2(model))
         self.mae.append(self.get_mae(model))
         self.mse.append(self.get_mse(model))
@@ -177,15 +186,16 @@ class ModelComparison:
         y_pred = model.predict(self.x_test)
         return mean_absolute_error(self.y_test, y_pred)
     def run(self):
+        wandb.init(project="covid-prediction-")
         self.x_train, self.y_train, self.x_test, self.y_test = self.split_data()
-        lr = self.linear_reg()
-        en = self.elasticnet()
-        sgdr = self.sgd_reg()
-        br = self.bayesian_ridge()
-        gbr = self.gbr()
-        svr = self.svr()
-        kr = self.kr()
-        rfg = self.rfg()
+        lr = self.linear_reg(self.x_train, self.y_train, self.x_test, self.y_test)
+        en = self.elasticnet(self.x_train, self.y_train, self.x_test, self.y_test)
+        sgdr = self.sgd_reg(self.x_train, self.y_train, self.x_test, self.y_test)
+        br = self.bayesian_ridge(self.x_train, self.y_train, self.x_test, self.y_test)
+        gbr = self.gbr(self.x_train, self.y_train, self.x_test, self.y_test)
+        svr = self.svr(self.x_train, self.y_train, self.x_test, self.y_test)
+        kr = self.kr(self.x_train, self.y_train, self.x_test, self.y_test)
+        rfg = self.rfg(self.x_train, self.y_train, self.x_test, self.y_test)
         result = pd.DataFrame.from_dict(self.data)
         result.sort_values(by='r2', ascending=False, inplace=True)
         return result, self.df

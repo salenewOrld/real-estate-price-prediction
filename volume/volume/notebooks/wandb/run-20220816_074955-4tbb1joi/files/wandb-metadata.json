@@ -1,0 +1,21 @@
+{
+    "os": "Linux-5.10.104-linuxkit-aarch64-with-glibc2.31",
+    "python": "3.9.13",
+    "heartbeatAt": "2022-08-16T07:50:04.962378",
+    "startedAt": "2022-08-16T07:49:55.319630",
+    "docker": null,
+    "cpu_count": 4,
+    "cuda": null,
+    "args": null,
+    "state": "running",
+    "program": "volume/volume/notebooks/model.ipynb",
+    "root": "/usr/src",
+    "git": {
+        "remote": "https://github.com/salene96x/hotel-real-estate-price-prediction.git",
+        "commit": "0045c004a88e560d7f00966a2a8db4bca96df6d3"
+    },
+    "email": null,
+    "host": "jupyter.local",
+    "username": "root",
+    "executable": "/opt/conda/bin/python"
+}

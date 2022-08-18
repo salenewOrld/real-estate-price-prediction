@@ -1,0 +1,15 @@
+artifact_uri: file:///usr/src/volume/volume/scripts/mlruns/0/a3931bbbb536493ba91ae54c61b8227d/artifacts
+end_time: 1660638160028
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+name: ''
+run_id: a3931bbbb536493ba91ae54c61b8227d
+run_uuid: a3931bbbb536493ba91ae54c61b8227d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1660638158586
+status: 3
+tags: []
+user_id: root

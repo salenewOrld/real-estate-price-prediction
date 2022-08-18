@@ -33,6 +33,7 @@ RUN conda install -y --file conda_requirements.txt
 RUN conda install -c conda-forge dtale
 #RUN conda install -c conda-forge auto-sklearn
 RUN conda install -c conda-forge pandas-profiling
+RUN conda install -c conda-forge wandb 
 
 COPY pip_requirements.txt .
 
