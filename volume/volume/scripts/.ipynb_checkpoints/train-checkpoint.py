@@ -27,6 +27,7 @@ import yaml
 
 import importlib
 
+
 logging.basicConfig(level=logging.WARN)
 logger = logging.getLogger(__name__)
 
@@ -45,6 +46,7 @@ class Trainer:
                 eval(f"exec('from sklearn.{k} import {j}')")
         return True
     def train(self, models, ex_id):
+        #mlflow.set_tracking_uri("file:///usr/src/volume/volume/mlruns")
         for k, v in models.items():
             for j in v:
                 with mlflow.start_run(experiment_id=ex_id):
@@ -59,6 +61,9 @@ class Trainer:
                     mlflow.log_metric("rmse", rmse)
                     mlflow.log_metric("r2", r2)
                     mlflow.log_metric("mae", mae)
+                    mlflow.sklearn.log_model(model, f"{j}")
+                    #mlflow.sklearn.save_model(model, '/usr/src/volume/volume/models/')
+                    #mlflow.log_artifact(x_train.to_csv(f'{j}-train.csv'))
                     mlflow.end_run()
     def split_data(self, config):
         etl = ETL(config['dataset'])
@@ -75,10 +80,10 @@ class Trainer:
         return x_train, y_train, x_test, y_test
     def perform(self):
         try :
-            ex_id = mlflow.create_experiment(self.config['experiment_name'])
-        except:
             current_experiment = dict(mlflow.get_experiment_by_name(self.config['experiment_name']))
             ex_id = current_experiment['experiment_id']
+        except:
+            ex_id = mlflow.create_experiment(self.config['experiment_name'])
         self.train(self.config['models'], ex_id)
             
     def eval_metrics(self, actual, pred):
@@ -100,4 +105,6 @@ if __name__ == "__main__":
                                     
     trainer = Trainer(cfg)
     trainer.perform()
+    #os.system('mlflow server --default-artifact-root [artifact-root] -h 0.0.0.0 -p 5959')
+    #selenium.get('0.0.0.0:5959')
     print('Successfully train @use \nmlflow server -h 0.0.0.0 -p 5959\nto show ui.')

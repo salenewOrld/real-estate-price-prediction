@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
+import mlflow
+import pandas as pd
 app = FastAPI()
 class Item(BaseModel):
     id : str
@@ -86,5 +88,8 @@ async def root():
 
 @app.post('/get_predicted_price')
 async def get_predicted_price(data : Item):
-    predicted_value = 'Test'
-    return {'Message' : {'predicted_value' : predicted_value}}
+    model = mlflow.artifact.download_artifact('/usr/src/volume/volume/scripts/mlruns/2/ba4a8c3b72e4459e9e3830b13271026f/model.pkl')
+    df = pd.DataFrame.from_dict(data.__dict__)
+    predicted_price = model.predict(df)
+    return {'Message' : 
+            {'predicted_value' : predicted_value}}

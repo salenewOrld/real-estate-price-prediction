@@ -1,4 +1,4 @@
-experiment_name: 'experiment_regressor'
+experiment_name: 'experiment_regressor2'
 dataset: 'train.csv'
 models:
     - 'RandomForestRegressor'

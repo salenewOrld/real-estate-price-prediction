@@ -1,0 +1,4 @@
+artifact_location: file:///usr/src/volume/volume/scripts/mlruns/2
+experiment_id: '2'
+lifecycle_stage: active
+name: experiment_regressor2

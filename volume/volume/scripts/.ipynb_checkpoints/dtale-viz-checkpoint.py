@@ -6,7 +6,7 @@ from dtale.views import startup
 import sys
 if __name__ == '__main__':
     app = build_app(reaper_on=False)
-    file = f'/usr/src/volume/volume/datasets/{sys.argv[1]}'
+    file = f'/usr/src/volume/volume/{sys.argv[2]}/{sys.argv[1]}'
     @app.route("/create-df")
     def create_df():
         df = pd.read_csv(file)

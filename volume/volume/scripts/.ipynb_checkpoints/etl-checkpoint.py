@@ -86,5 +86,6 @@ class ETL:
         #df = self.transform(df)
         #df = self._truly_clean(df)
         #df = self.convert_type(df)
+        df.to_csv('train-done-etl.csv')
         return df
     

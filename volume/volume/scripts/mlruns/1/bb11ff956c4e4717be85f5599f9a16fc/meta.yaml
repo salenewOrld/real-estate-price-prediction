@@ -2,7 +2,7 @@ artifact_uri: file:///usr/src/volume/volume/scripts/mlruns/1/bb11ff956c4e4717be8
 end_time: 1660811000881
 entry_point_name: ''
 experiment_id: '1'
-lifecycle_stage: active
+lifecycle_stage: deleted
 name: ''
 run_id: bb11ff956c4e4717be85f5599f9a16fc
 run_uuid: bb11ff956c4e4717be85f5599f9a16fc

@@ -1,0 +1,16 @@
+artifact_path: GradientBoostingRegressor
+flavors:
+  python_function:
+    env: conda.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    python_version: 3.9.13
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 0.24.2
+mlflow_version: 1.26.1
+model_uuid: 81f3903a87904055bcbef68a0737fca8
+run_id: e1fec8c77e6c4b1cb253f7bdaa5d5abc
+utc_time_created: '2022-08-20 10:08:52.859778'

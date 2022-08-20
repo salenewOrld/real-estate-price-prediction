@@ -1,0 +1,16 @@
+artifact_path: KernelRidge
+flavors:
+  python_function:
+    env: conda.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    python_version: 3.9.13
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 0.24.2
+mlflow_version: 1.26.1
+model_uuid: 6668f9d4060f4106b61f22a5a1682277
+run_id: 3468c85620854255bb112499523ce6ce
+utc_time_created: '2022-08-20 09:48:07.491787'
