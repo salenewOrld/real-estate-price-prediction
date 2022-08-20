@@ -85,7 +85,7 @@ class ETL:
         df = self.mapping_data(df)
         #df = self.transform(df)
         #df = self._truly_clean(df)
-        #df = self.convert_type(df)
-        df.to_csv('train-done-etl.csv')
+        #df = self.convert_type(df)x
+        df.to_csv(r'/usr/src/volume/volume/done-etl-data/train.csv')
         return df
     
