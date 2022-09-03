@@ -39,3 +39,4 @@ opendatasets
 sweetviz
 #Autoviz
 #pandas-profiling
+opendatasets

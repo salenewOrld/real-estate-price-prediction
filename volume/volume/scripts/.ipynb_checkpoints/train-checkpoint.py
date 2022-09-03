@@ -62,7 +62,7 @@ class Trainer:
                     mlflow.log_metric("r2", r2)
                     mlflow.log_metric("mae", mae)
                     mlflow.sklearn.log_model(model, f"{j}")
-                    mlflow.sklearn.save_model(model, f'/usr/src/volume/volume/models/{j}')
+                    #mlflow.sklearn.save_model(model, f'/usr/src/volume/volume/models/{j}')
                     #mlflow.log_artifact(x_train.to_csv(f'{j}-train.csv'))
                     mlflow.end_run()
     def split_data(self, config):
